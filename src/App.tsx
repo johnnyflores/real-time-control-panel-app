@@ -19,6 +19,13 @@ function App() {
   const [state, setState] = useState<SystemState>(initialState);
   const [running, setRunning] = useState(false);
 
+  const handleLoadChange = (value: number) => {
+    setState((prev) => ({
+      ...prev,
+      load: value,
+    }));
+  };
+
   useEffect(() => {
     if (!running) return;
 
@@ -31,24 +38,41 @@ function App() {
   return (
     <>
       <div className="p-6 bg-gray-900 text-white min-h-screen">
-        <h1 className="text-2xl font-bold mb-4">
+        <h1 className="text-2xl font-bold mb-6">
           Real-Time Simulation Dashboard
         </h1>
 
-        <button
-          onClick={() => setRunning(!running)}
-          className="px-4 py-2 bg-blue-600 rounded"
-        >
-          {running ? "Stop" : "Start"}
-        </button>
+        <div className="bg-gray-800 p-4 rounded mb-6">
+          <h2 className="font-semibold mb-4">Control Panel</h2>
 
-        <div className="mt-6 space-y-2">
+          <button
+            onClick={() => setRunning(!running)}
+            className="px-4 py-2 bg-blue-600 rounded mb-4"
+          >
+            {running ? "Stop Simulation" : "Start Simulation"}
+          </button>
+
+          <div className="mt-4">
+            <label className="block mb-2">System Load: {state.load}</label>
+
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value={state.load}
+              onChange={(e) => handleLoadChange(Number(e.target.value))}
+              className="w-full"
+            />
+          </div>
+        </div>
+
+        <div className="mb-6">
           <p>Time: {state.time}</p>
           <p>Temperature: {state.temperature.toFixed(2)}°C</p>
           <p>Load: {state.load}%</p>
         </div>
 
-        <div className="mt-10 h-80 bg-gray-800 p-4 rounded">
+        <div className="h-80 bg-gray-800 p-4 rounded">
           <h2 className="mb-2 font-semibold">Temperature Trend</h2>
 
           <ResponsiveContainer width="100%" height="100%">

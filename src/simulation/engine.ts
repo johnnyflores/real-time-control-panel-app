@@ -13,19 +13,21 @@ export const initialState: SystemState = {
 };
 
 export function updateSystem(state: SystemState): SystemState {
-  const loadEffect = state.load * 0.2;
+  const loadEffect = state.load * 0.25;
 
-  const newTemp = state.temperature + loadEffect - 0.3;
-
-  const newPoint = {
-    time: state.time,
-    temperature: newTemp,
-  };
+  const newTemp = state.temperature + loadEffect - 0.4;
 
   return {
+    ...state,
     time: state.time + 1,
     temperature: newTemp,
     load: state.load,
-    history: [...state.history.slice(-20), newPoint], // keep last 20 points
+    history: [
+      ...state.history.slice(-20),
+      {
+        time: state.time,
+        temperature: newTemp,
+      },
+    ],
   };
 }
