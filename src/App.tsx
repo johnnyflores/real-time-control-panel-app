@@ -4,6 +4,17 @@ import {
   updateSystem,
   type SystemState,
 } from "./simulation/engine";
+
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  CartesianGrid,
+} from "recharts";
+
 function App() {
   const [state, setState] = useState<SystemState>(initialState);
   const [running, setRunning] = useState(false);
@@ -35,6 +46,26 @@ function App() {
           <p>Time: {state.time}</p>
           <p>Temperature: {state.temperature.toFixed(2)}°C</p>
           <p>Load: {state.load}%</p>
+        </div>
+
+        <div className="mt-10 h-80 bg-gray-800 p-4 rounded">
+          <h2 className="mb-2 font-semibold">Temperature Trend</h2>
+
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart data={state.history}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="time" />
+              <YAxis />
+              <Tooltip />
+              <Line
+                type="monotone"
+                dataKey="temperature"
+                stroke="#00bcd4"
+                strokeWidth={2}
+                dot={false}
+              />
+            </LineChart>
+          </ResponsiveContainer>
         </div>
       </div>
     </>
