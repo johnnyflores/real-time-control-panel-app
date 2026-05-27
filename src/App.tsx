@@ -44,112 +44,123 @@ function App() {
   }, [running]);
   return (
     <>
-      <div className="p-6 bg-gray-900 text-white min-h-screen">
-        <h1 className="text-2xl font-bold mb-6">
-          Real-Time Simulation Dashboard
-        </h1>
-
-        <div className="bg-gray-800 p-4 rounded mb-6">
-          <h2 className="font-semibold mb-4">Control Panel</h2>
-
-          <button
-            onClick={() => setRunning(!running)}
-            className="px-4 py-2 bg-blue-600 rounded mb-4"
-          >
-            {running ? "Stop Simulation" : "Start Simulation"}
-          </button>
-
-          <div className="mt-4">
-            <label className="block mb-2">System Load: {state.load}</label>
-
+      <div className="min-h-screen bg-gray-950 text-white p-4 grid grid-rows-[auto_1fr_auto] gap-4">
+        <header className="bg-gray-900 p-4 rounded flex justify-between items-center">
+          <h1 className="text-xl font-bold">RT Simulation Control System</h1>
+          <div className="flex gap-4 items-center">
+            <span>
+              Mode: <span className="text-cyan-400">{state.mode}</span>
+            </span>
+            <span>
+              Status:{" "}
+              {state.temperature > 90 ? (
+                <span className="text-red-500">CRITICAL</span>
+              ) : state.temperature > 75 ? (
+                <span className="text-yellow-400">WARNING</span>
+              ) : (
+                <span className="text-green-400">NORMAL</span>
+              )}
+            </span>
+          </div>
+        </header>
+        <main className="grid grid-cols-12 gap-4">
+          <div className="col-span-3 bg-gray-900 p-4 rounded">
+            <h2 className="font-semibold mb-4">Control Panel</h2>
+            <button
+              onClick={() => setRunning(!running)}
+              className="w-full mb-4 bg-blue-600 p-2 rounded"
+            >
+              {running ? "Stop System" : "Start System"}
+            </button>
+            <label className="text-sm">Load: {state.load}</label>
             <input
               type="range"
               min="0"
               max="100"
               value={state.load}
               onChange={(e) => handleLoadChange(Number(e.target.value))}
-              className="w-full"
+              className="w-full mb-6"
             />
-          </div>
-
-          <div className="mt-6">
-            <label className="block mb-2 font-semibold">
-              System Mode: {state.mode}
-            </label>
-
-            <div className="flex gap-2">
-              <button
-                onClick={() => handleModeChange("normal")}
-                className={`px-3 py-1 rounded ${
-                  state.mode === "normal" ? "bg-green-600" : "bg-gray-700"
-                }`}
-              >
-                Normal
-              </button>
-
-              <button
-                onClick={() => handleModeChange("stress")}
-                className={`px-3 py-1 rounded ${
-                  state.mode === "stress" ? "bg-yellow-600" : "bg-gray-700"
-                }`}
-              >
-                Stress
-              </button>
-
-              <button
-                onClick={() => handleModeChange("emergency")}
-                className={`px-3 py-1 rounded ${
-                  state.mode === "emergency" ? "bg-red-600" : "bg-gray-700"
-                }`}
-              >
-                Emergency
-              </button>
+            <div className="space-y-2">
+              {["normal", "stress", "emergency"].map((mode) => (
+                <button
+                  key={mode}
+                  onClick={() =>
+                    handleModeChange(mode as "normal" | "stress" | "emergency")
+                  }
+                  className={`w-full p-2 rounded ${
+                    state.mode === mode
+                      ? mode === "normal"
+                        ? "bg-green-600"
+                        : mode === "stress"
+                          ? "bg-yellow-600"
+                          : "bg-red-600"
+                      : "bg-gray-700"
+                  }`}
+                >
+                  {mode.toUpperCase()}
+                </button>
+              ))}
             </div>
           </div>
+          <div className="col-span-6 bg-gray-900 p-4 rounded">
+            <h2 className="font-semibold mb-4">Live Temperature Analysis</h2>
+            <div className="h-80">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={state.history}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="time" />
+                  <YAxis />
+                  <Tooltip />
+                  <Line
+                    type="monotone"
+                    dataKey="temperature"
+                    stroke="#00bcd4"
+                    strokeWidth={2}
+                    dot={false}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
 
-          <div className="mb-6">
-            <p>Time: {state.time}</p>
-            <p>Temperature: {state.temperature.toFixed(2)}°C</p>
-            <p>Load: {state.load}%</p>
-            <p>Mode: {state.mode}</p>
+            <div className="mt-4 grid grid-cols-3 gap-4 text-center">
+              <div className="bg-gray-800 p-2 rounded">
+                Temp: {state.temperature.toFixed(1)}°C
+              </div>
+              <div className="bg-gray-800 p-2 rounded">Load: {state.load}%</div>
+              <div className="bg-gray-800 p-2 rounded">Time: {state.time}</div>
+            </div>
           </div>
-
-          <div className="mb-4">
-            <span className="font-semibold">System Status: </span>
-
-            {state.temperature > 90 ? (
-              <span className="text-red-500">CRITICAL</span>
-            ) : state.temperature > 75 ? (
-              <span className="text-yellow-400">WARNING</span>
-            ) : (
-              <span className="text-green-400">NORMAL</span>
-            )}
+          <div className="col-span-3 bg-gray-900 p-4 rounded">
+            <h2 className="font-semibold mb-4">System Status</h2>
+            <div
+              className={`p-4 rounded text-center ${
+                state.temperature > 90
+                  ? "bg-red-600"
+                  : state.temperature > 75
+                    ? "bg-yellow-600"
+                    : "bg-green-600"
+              }`}
+            >
+              {state.temperature > 90
+                ? "CRITICAL"
+                : state.temperature > 75
+                  ? "WARNING"
+                  : "NORMAL"}
+            </div>
+            <div className="mt-4 text-sm space-y-2">
+              <p>Mode: {state.mode}</p>
+              <p>Alerts: {state.alerts.length}</p>
+              <p>System Load: {state.load}%</p>
+            </div>
           </div>
+        </main>
+        <div className="bg-gray-900 p-4 rounded mt-4">
+          <h2 className="font-semibold mb-3">Event Log</h2>
 
-          <div className="h-80 bg-gray-800 p-4 rounded">
-            <h2 className="mb-2 font-semibold">Temperature Trend</h2>
-
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={state.history}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="time" />
-                <YAxis />
-                <Tooltip />
-                <Line
-                  type="monotone"
-                  dataKey="temperature"
-                  stroke="#00bcd4"
-                  strokeWidth={2}
-                  dot={false}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-          <div className="mt-6 bg-gray-800 p-4 rounded">
-            <h2 className="font-semibold mb-3">System Alerts</h2>
-
+          <div className="space-y-2 max-h-40 overflow-auto">
             {state.alerts.length === 0 ? (
-              <p className="text-green-400">No alerts — system stable</p>
+              <p className="text-green-400">No events</p>
             ) : (
               <div className="space-y-2">
                 {state.alerts.map((alert, index) => (
