@@ -26,6 +26,13 @@ function App() {
     }));
   };
 
+  const handleModeChange = (mode: "normal" | "stress" | "emergency") => {
+    setState((prev) => ({
+      ...prev,
+      mode,
+    }));
+  };
+
   useEffect(() => {
     if (!running) return;
 
@@ -64,12 +71,48 @@ function App() {
               className="w-full"
             />
           </div>
+
+          <div className="mt-6">
+            <label className="block mb-2 font-semibold">
+              System Mode: {state.mode}
+            </label>
+
+            <div className="flex gap-2">
+              <button
+                onClick={() => handleModeChange("normal")}
+                className={`px-3 py-1 rounded ${
+                  state.mode === "normal" ? "bg-green-600" : "bg-gray-700"
+                }`}
+              >
+                Normal
+              </button>
+
+              <button
+                onClick={() => handleModeChange("stress")}
+                className={`px-3 py-1 rounded ${
+                  state.mode === "stress" ? "bg-yellow-600" : "bg-gray-700"
+                }`}
+              >
+                Stress
+              </button>
+
+              <button
+                onClick={() => handleModeChange("emergency")}
+                className={`px-3 py-1 rounded ${
+                  state.mode === "emergency" ? "bg-red-600" : "bg-gray-700"
+                }`}
+              >
+                Emergency
+              </button>
+            </div>
+          </div>
         </div>
 
         <div className="mb-6">
           <p>Time: {state.time}</p>
           <p>Temperature: {state.temperature.toFixed(2)}°C</p>
           <p>Load: {state.load}%</p>
+          <p>Mode: {state.mode}</p>
         </div>
 
         <div className="h-80 bg-gray-800 p-4 rounded">
