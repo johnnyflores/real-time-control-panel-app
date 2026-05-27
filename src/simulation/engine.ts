@@ -1,10 +1,19 @@
 export type SystemMode = "normal" | "stress" | "emergency";
+export type AlertLevel = "normal" | "warning" | "critical";
+
+export type Alert = {
+  level: AlertLevel;
+  message: string;
+  time: number;
+};
+
 export type SystemState = {
   time: number;
   temperature: number;
   load: number;
   mode: SystemMode;
   history: { time: number; temperature: number }[];
+  alerts: Alert[];
 };
 
 export const initialState: SystemState = {
@@ -13,6 +22,7 @@ export const initialState: SystemState = {
   load: 20,
   mode: "normal",
   history: [],
+  alerts: [],
 };
 
 export function updateSystem(state: SystemState): SystemState {
@@ -34,6 +44,22 @@ export function updateSystem(state: SystemState): SystemState {
 
   const newTemp = state.temperature + state.load * heatFactor - cooling;
 
+  const newAlerts = [...state.alerts];
+
+  if (newTemp > 90) {
+    newAlerts.push({
+      level: "critical",
+      message: `Critical Alert: Temperature reached ${newTemp.toFixed(2)}°C!`,
+      time: state.time,
+    });
+  } else if (newTemp > 75) {
+    newAlerts.push({
+      level: "warning",
+      message: `Warning: Temperature is high at ${newTemp.toFixed(2)}°C.`,
+      time: state.time,
+    });
+  }
+
   return {
     ...state,
     time: state.time + 1,
@@ -45,5 +71,6 @@ export function updateSystem(state: SystemState): SystemState {
         temperature: newTemp,
       },
     ],
+    alerts: newAlerts.slice(-10),
   };
 }

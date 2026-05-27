@@ -106,33 +106,68 @@ function App() {
               </button>
             </div>
           </div>
-        </div>
 
-        <div className="mb-6">
-          <p>Time: {state.time}</p>
-          <p>Temperature: {state.temperature.toFixed(2)}°C</p>
-          <p>Load: {state.load}%</p>
-          <p>Mode: {state.mode}</p>
-        </div>
+          <div className="mb-6">
+            <p>Time: {state.time}</p>
+            <p>Temperature: {state.temperature.toFixed(2)}°C</p>
+            <p>Load: {state.load}%</p>
+            <p>Mode: {state.mode}</p>
+          </div>
 
-        <div className="h-80 bg-gray-800 p-4 rounded">
-          <h2 className="mb-2 font-semibold">Temperature Trend</h2>
+          <div className="mb-4">
+            <span className="font-semibold">System Status: </span>
 
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={state.history}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="time" />
-              <YAxis />
-              <Tooltip />
-              <Line
-                type="monotone"
-                dataKey="temperature"
-                stroke="#00bcd4"
-                strokeWidth={2}
-                dot={false}
-              />
-            </LineChart>
-          </ResponsiveContainer>
+            {state.temperature > 90 ? (
+              <span className="text-red-500">CRITICAL</span>
+            ) : state.temperature > 75 ? (
+              <span className="text-yellow-400">WARNING</span>
+            ) : (
+              <span className="text-green-400">NORMAL</span>
+            )}
+          </div>
+
+          <div className="h-80 bg-gray-800 p-4 rounded">
+            <h2 className="mb-2 font-semibold">Temperature Trend</h2>
+
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={state.history}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="time" />
+                <YAxis />
+                <Tooltip />
+                <Line
+                  type="monotone"
+                  dataKey="temperature"
+                  stroke="#00bcd4"
+                  strokeWidth={2}
+                  dot={false}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+          <div className="mt-6 bg-gray-800 p-4 rounded">
+            <h2 className="font-semibold mb-3">System Alerts</h2>
+
+            {state.alerts.length === 0 ? (
+              <p className="text-green-400">No alerts — system stable</p>
+            ) : (
+              <div className="space-y-2">
+                {state.alerts.map((alert, index) => (
+                  <div
+                    key={index}
+                    className={`p-2 rounded ${
+                      alert.level === "critical"
+                        ? "bg-red-600"
+                        : "bg-yellow-600"
+                    }`}
+                  >
+                    <p className="font-semibold">{alert.message}</p>
+                    <p className="text-xs opacity-80">Time: {alert.time}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </>
