@@ -17,7 +17,7 @@ type Props = {
 
 const ChartPanel = ({ state }: Props) => {
   return (
-    <Card className="col-span-6">
+    <Card className="md:col-span-6 col-span-12">
       <Title>Live Temperature Analysis</Title>
       <div className="h-80">
         <ResponsiveContainer width="100%" height="100%">

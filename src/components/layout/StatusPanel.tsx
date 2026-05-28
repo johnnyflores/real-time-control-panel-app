@@ -9,7 +9,7 @@ type Props = {
 const StatusPanel = ({ sim }: Props) => {
   const { state } = sim;
   return (
-    <Card className="col-span-3">
+    <Card className="md:col-span-3 col-span-12">
       <Title>System Status</Title>
       <div
         className={`p-4 rounded text-center ${

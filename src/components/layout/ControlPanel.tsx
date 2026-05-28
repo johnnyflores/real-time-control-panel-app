@@ -11,7 +11,7 @@ type Props = {
 
 const ControlPanel = ({ sim }: Props) => {
   return (
-    <Card className="col-span-3">
+    <Card className="md:col-span-3 col-span-12">
       <Title>Control Panel</Title>
       <Button
         fullWidth
