@@ -34,14 +34,16 @@ export function updateSystem(state: SystemState): SystemState {
   if (newTemp > CRITICAL_TEMPERATURE) {
     newAlerts.push({
       level: "critical",
-      message: `Critical Alert: Temperature reached ${newTemp.toFixed(2)}°C!`,
+      message: "Critical temperature reached!",
       time: state.time,
+      temperature: newTemp,
     });
   } else if (newTemp > WARNING_TEMPERATURE) {
     newAlerts.push({
       level: "warning",
-      message: `Warning: Temperature is high at ${newTemp.toFixed(2)}°C.`,
+      message: "High temperature detected",
       time: state.time,
+      temperature: newTemp,
     });
   }
 

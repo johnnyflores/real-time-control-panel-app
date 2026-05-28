@@ -4,4 +4,5 @@ export type Alert = {
   level: AlertLevel;
   message: string;
   time: number;
+  temperature: number;
 };
