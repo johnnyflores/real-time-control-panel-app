@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import type { useSimulation } from "../../hooks/useSimulation";
 import Card from "../ui/Card";
 import Title from "../ui/Title";
@@ -8,6 +9,11 @@ type Props = {
 };
 const AlertPanel = ({ sim }: Props) => {
   const { state } = sim;
+  const bottomRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [state.alerts]);
   return (
     <Card>
       <Title>Event Log</Title>
@@ -19,6 +25,7 @@ const AlertPanel = ({ sim }: Props) => {
             <AlertItem key={index} alert={alert} />
           ))
         )}
+        <div ref={bottomRef} />
       </div>
     </Card>
   );
