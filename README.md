@@ -4,6 +4,12 @@ A real-time industrial-style dashboard built with React, TypeScript, Vite, Tailw
 
 The app simulates a temperature-driven system with adjustable load and operating modes, then presents the state through a control panel, live chart, status indicators, and an event log.
 
+## Demo
+
+<p align="center">
+  <img src="./public/dashboard.png" alt="Real-Time Control Panel App" width="900"/>
+</p>
+
 ## Features
 
 - Start and stop the simulation loop from the control panel
