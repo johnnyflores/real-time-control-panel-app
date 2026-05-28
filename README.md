@@ -6,8 +6,14 @@ The app simulates a temperature-driven system with adjustable load and operating
 
 ## Demo
 
+The application visualizes a real-time simulation system with dynamic temperature updates, mode switching, and live alerts.
+
 <p align="center">
-  <img src="./public/dashboard.png" alt="Real-Time Control Panel App" width="900"/>
+  <img src="./public/dashboard.png" alt="Main dashboard view" width="900"/>
+</p>
+
+<p align="center">
+  <img src="./public/dashboard-light.png" alt="Light mode view" width="900"/>
 </p>
 
 ## Features
