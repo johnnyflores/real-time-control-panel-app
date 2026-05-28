@@ -1,15 +1,10 @@
 import { type SystemMode } from "@/types";
+import { MODES } from "@/constants/modes";
 
 type Props = {
   value: SystemMode;
   onChange: (mode: SystemMode) => void;
 };
-
-const MODES = [
-  { value: "normal", label: "NORMAL", color: "bg-green-600" },
-  { value: "stress", label: "STRESS", color: "bg-yellow-600" },
-  { value: "emergency", label: "EMERGENCY", color: "bg-red-600" },
-] as const;
 
 export default function ModeSelector({ value, onChange }: Props) {
   return (

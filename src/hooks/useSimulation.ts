@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { initialState, updateSystem } from "@/simulation/engine";
 import { type SystemState } from "@/types";
+import { SIMULATION_INTERVAL } from "@/constants/system";
 
 export function useSimulation() {
   const [state, setState] = useState<SystemState>(initialState);
@@ -11,7 +12,7 @@ export function useSimulation() {
 
     const interval = setInterval(() => {
       setState((prev) => updateSystem(prev));
-    }, 1000);
+    }, SIMULATION_INTERVAL);
 
     return () => clearInterval(interval);
   }, [running]);

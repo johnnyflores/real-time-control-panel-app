@@ -1,6 +1,7 @@
 import type { useSimulation } from "@/hooks/useSimulation";
 import Card from "@/components/ui/Card";
 import Title from "@/components/ui/Title";
+import { CRITICAL_TEMPERATURE, WARNING_TEMPERATURE } from "@/constants/system";
 
 type Props = {
   sim: ReturnType<typeof useSimulation>;
@@ -12,16 +13,16 @@ const StatusPanel = ({ sim }: Props) => {
       <Title>System Status</Title>
       <div
         className={`p-4 rounded text-center ${
-          state.temperature > 90
+          state.temperature > CRITICAL_TEMPERATURE
             ? "bg-red-600"
-            : state.temperature > 75
+            : state.temperature > WARNING_TEMPERATURE
               ? "bg-yellow-600"
               : "bg-green-600"
         }`}
       >
-        {state.temperature > 90
+        {state.temperature > CRITICAL_TEMPERATURE
           ? "CRITICAL"
-          : state.temperature > 75
+          : state.temperature > WARNING_TEMPERATURE
             ? "WARNING"
             : "NORMAL"}
       </div>

@@ -1,3 +1,4 @@
+import { CRITICAL_TEMPERATURE, WARNING_TEMPERATURE } from "@/constants/system";
 import { type SystemState } from "@/types";
 
 export const initialState: SystemState = {
@@ -30,13 +31,13 @@ export function updateSystem(state: SystemState): SystemState {
 
   const newAlerts = [...state.alerts];
 
-  if (newTemp > 90) {
+  if (newTemp > CRITICAL_TEMPERATURE) {
     newAlerts.push({
       level: "critical",
       message: `Critical Alert: Temperature reached ${newTemp.toFixed(2)}°C!`,
       time: state.time,
     });
-  } else if (newTemp > 75) {
+  } else if (newTemp > WARNING_TEMPERATURE) {
     newAlerts.push({
       level: "warning",
       message: `Warning: Temperature is high at ${newTemp.toFixed(2)}°C.`,
@@ -55,6 +56,6 @@ export function updateSystem(state: SystemState): SystemState {
         temperature: newTemp,
       },
     ],
-    alerts: newAlerts.slice(-10),
+    alerts: newAlerts.slice(-20),
   };
 }

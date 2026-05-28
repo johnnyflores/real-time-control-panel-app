@@ -1,0 +1,5 @@
+export const WARNING_TEMPERATURE = 75;
+
+export const CRITICAL_TEMPERATURE = 90;
+
+export const SIMULATION_INTERVAL = 1000;
