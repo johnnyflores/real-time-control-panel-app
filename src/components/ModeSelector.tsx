@@ -1,9 +1,9 @@
-import { type SystemMode } from "@/types";
+import { type SimulationMode } from "@/types/simulation";
 import { MODES } from "@/constants/modes";
 
 type Props = {
-  value: SystemMode;
-  onChange: (mode: SystemMode) => void;
+  value: SimulationMode;
+  onChange: (mode: SimulationMode) => void;
 };
 
 export default function ModeSelector({ value, onChange }: Props) {

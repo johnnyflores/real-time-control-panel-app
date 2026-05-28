@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { initialState, updateSystem } from "@/simulation/engine";
-import { type SystemState } from "@/types";
+import { type SystemState } from "@/types/simulation";
 import { SIMULATION_INTERVAL } from "@/constants/system";
 
 export function useSimulation() {

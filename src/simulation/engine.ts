@@ -1,5 +1,5 @@
 import { CRITICAL_TEMPERATURE, WARNING_TEMPERATURE } from "@/constants/system";
-import { type SystemState } from "@/types";
+import { type SystemState } from "@/types/simulation";
 
 export const initialState: SystemState = {
   time: 0,
