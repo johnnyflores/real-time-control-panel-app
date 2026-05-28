@@ -1,73 +1,136 @@
-# React + TypeScript + Vite
+# Real-Time Control Panel App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A real-time industrial-style dashboard built with React, TypeScript, Vite, Tailwind CSS, and Recharts.
 
-Currently, two official plugins are available:
+The app simulates a temperature-driven system with adjustable load and operating modes, then presents the state through a control panel, live chart, status indicators, and an event log.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- Start and stop the simulation loop from the control panel
+- Adjust system load from 0 to 100%
+- Switch between `normal`, `stress`, and `emergency` operating modes
+- Visualize temperature history in a live line chart
+- Show current temperature, load, time, and system status
+- Record warning and critical alerts in an event log
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS 4
+- Recharts
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Simulation Model
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+The simulation updates once per second.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Initial temperature: `50°C`
+- Initial load: `20%`
+- Initial mode: `normal`
+- History window: last `30` points
+- Alert log size: last `20` events
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Modes
+
+- `normal`: stable baseline heating
+- `stress`: increased heating rate
+- `emergency`: aggressive heating and faster escalation
+
+### Temperature Thresholds
+
+- Warning: above `75°C`
+- Critical: above `90°C`
+
+## Application Structure
+
+### UI Layer
+
+- `Header`: current mode and top-level system status
+- `ControlPanel`: start/stop controls, load slider, and mode selector
+- `ChartPanel`: live temperature chart and current metrics
+- `StatusPanel`: status badge and state summary
+- `AlertPanel`: scrolling event log for warning and critical alerts
+
+### State Layer
+
+`useSimulation` owns the simulation state and control actions.
+
+It exposes:
+
+- `state`
+- `running`
+- `setLoad(load)`
+- `setMode(mode)`
+- `toggleRunning()`
+
+### Engine Layer
+
+The simulation engine is implemented as a pure update function in `src/simulation/engine.ts`.
+
+It is responsible for:
+
+- advancing time
+- computing the next temperature from load and mode
+- appending chart history
+- generating alerts when thresholds are exceeded
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 20+ recommended
+- npm
+
+### Install
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Run the Development Server
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+### Build for Production
+
+```bash
+npm run build
+```
+
+### Lint the Project
+
+```bash
+npm run lint
+```
+
+### Preview the Production Build
+
+```bash
+npm run preview
+```
+
+## Project Layout
+
+```text
+src/
+	components/
+		layout/
+		ui/
+	constants/
+	hooks/
+	simulation/
+	types/
+	utils/
+```
+
+## Purpose
+
+This project demonstrates:
+
+- modular React UI composition
+- custom-hook-based state management
+- a pure simulation core separated from rendering
+- a dashboard layout for real-time monitoring scenarios
