@@ -1,4 +1,5 @@
 import type { useSimulation } from "../../hooks/useSimulation";
+import Card from "../ui/Card";
 import Title from "../ui/Title";
 
 type Props = {
@@ -7,7 +8,7 @@ type Props = {
 const StatusPanel = ({ sim }: Props) => {
   const { state } = sim;
   return (
-    <div className="col-span-3 bg-gray-900 p-4 rounded">
+    <Card className="col-span-3">
       <Title>System Status</Title>
       <div
         className={`p-4 rounded text-center ${
@@ -29,7 +30,7 @@ const StatusPanel = ({ sim }: Props) => {
         <p>Alerts: {state.alerts.length}</p>
         <p>System Load: {state.load}%</p>
       </div>
-    </div>
+    </Card>
   );
 };
 

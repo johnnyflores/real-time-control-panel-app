@@ -9,6 +9,7 @@ import {
 } from "recharts";
 import type { SystemState } from "../../simulation/types";
 import Title from "../ui/Title";
+import Card from "../ui/Card";
 
 type Props = {
   state: SystemState;
@@ -16,7 +17,7 @@ type Props = {
 
 const ChartPanel = ({ state }: Props) => {
   return (
-    <div className="col-span-6 bg-gray-900 p-4 rounded">
+    <Card className="col-span-6">
       <Title>Live Temperature Analysis</Title>
       <div className="h-80">
         <ResponsiveContainer width="100%" height="100%">
@@ -42,7 +43,7 @@ const ChartPanel = ({ state }: Props) => {
         <div className="bg-gray-800 p-2 rounded">Load: {state.load}%</div>
         <div className="bg-gray-800 p-2 rounded">Time: {state.time}</div>
       </div>
-    </div>
+    </Card>
   );
 };
 

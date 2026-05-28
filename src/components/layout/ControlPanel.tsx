@@ -1,6 +1,7 @@
 import { useSimulation } from "../../hooks/useSimulation";
 import ModeSelector from "../ModeSelector";
 import Button from "../ui/Button";
+import Card from "../ui/Card";
 import Slider from "../ui/Slider";
 import Title from "../ui/Title";
 
@@ -10,7 +11,7 @@ type Props = {
 
 const ControlPanel = ({ sim }: Props) => {
   return (
-    <div className="col-span-3 bg-gray-900 p-4 rounded">
+    <Card className="col-span-3">
       <Title>Control Panel</Title>
       <Button
         fullWidth
@@ -29,7 +30,7 @@ const ControlPanel = ({ sim }: Props) => {
       <div className="space-y-2">
         <ModeSelector value={sim.state.mode} onChange={sim.setMode} />
       </div>
-    </div>
+    </Card>
   );
 };
 
