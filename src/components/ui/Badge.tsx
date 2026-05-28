@@ -13,7 +13,7 @@ export default function Badge({ status, children }: Props) {
   return (
     <span
       className={`
-        px-2 py-1 rounded text-xs font-semibold text-white
+        px-2 py-1 rounded text-xs font-semibold text-white transition-all duration-300
         ${colors[status]}
       `}
     >

@@ -10,13 +10,13 @@ type Props = {
 const Header = ({ sim }: Props) => {
   const { theme, toggleTheme } = useTheme();
   return (
-    <header className="dark:bg-gray-900 bg-white p-4 rounded flex justify-between items-center">
+    <header className="dark:bg-gray-900 bg-white transition-colors duration-300 p-4 rounded flex justify-between items-center">
       <Title className="text-xl">Real-Time Dashboard</Title>
       <div className="flex gap-4 items-center">
-        <span className="dark:text-white text-gray-700">
+        <span className="dark:text-white text-gray-700 transition-colors duration-300">
           Mode: <span className="text-cyan-400">{sim.state.mode}</span>
         </span>
-        <span className="dark:text-white text-gray-700">
+        <span className="dark:text-white text-gray-700 transition-colors duration-300">
           Status:{" "}
           {sim.state.temperature > 90 ? (
             <span className="text-red-500">CRITICAL</span>

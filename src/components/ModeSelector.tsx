@@ -16,7 +16,8 @@ export default function ModeSelector({ value, onChange }: Props) {
             key={mode.value}
             onClick={() => onChange(mode.value)}
             className={`
-              w-full p-2 rounded transition
+              w-full p-2 rounded transition-colors duration-200
+              hover:opacity-90
               ${isActive ? mode.color : "bg-gray-700"}
             `}
           >

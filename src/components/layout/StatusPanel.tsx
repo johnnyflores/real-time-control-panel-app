@@ -27,11 +27,13 @@ const StatusPanel = ({ sim }: Props) => {
             : "NORMAL"}
       </div>
       <div className="mt-4 text-sm space-y-2">
-        <p className="dark:text-white text-gray-700">Mode: {state.mode}</p>
-        <p className="dark:text-white text-gray-700">
+        <p className="dark:text-white text-gray-700 transition-colors duration-300">
+          Mode: {state.mode}
+        </p>
+        <p className="dark:text-white text-gray-700 transition-colors duration-300">
           Alerts: {state.alerts.length}
         </p>
-        <p className="dark:text-white text-gray-700">
+        <p className="dark:text-white text-gray-700 transition-colors duration-300">
           System Load: {state.load}%
         </p>
       </div>

@@ -13,6 +13,7 @@ export default function Card({ children, className = "" }: Props) {
         rounded
         shadow-sm
         border border-gray-800
+        animate-fade transition-all duration-300
         ${className}
       `}
     >

@@ -8,7 +8,7 @@ export default function Slider({ label, className = "", ...props }: Props) {
   return (
     <div className="w-full mb-6 mt-6">
       {label && (
-        <div className="text-sm mb-1 dark:text-gray-300 text-gray-700">
+        <div className="text-sm mb-1 dark:text-gray-300 text-gray-700 transition-colors duration-300">
           {label}
         </div>
       )}
