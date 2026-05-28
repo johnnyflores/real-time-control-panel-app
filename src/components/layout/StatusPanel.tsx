@@ -1,6 +1,6 @@
-import type { useSimulation } from "../../hooks/useSimulation";
-import Card from "../ui/Card";
-import Title from "../ui/Title";
+import type { useSimulation } from "@/hooks/useSimulation";
+import Card from "@/components/ui/Card";
+import Title from "@/components/ui/Title";
 
 type Props = {
   sim: ReturnType<typeof useSimulation>;

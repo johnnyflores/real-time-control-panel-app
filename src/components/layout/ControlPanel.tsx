@@ -1,9 +1,9 @@
-import { useSimulation } from "../../hooks/useSimulation";
-import ModeSelector from "../ModeSelector";
-import Button from "../ui/Button";
-import Card from "../ui/Card";
-import Slider from "../ui/Slider";
-import Title from "../ui/Title";
+import { useSimulation } from "@/hooks/useSimulation";
+import ModeSelector from "@/components/ModeSelector";
+import Button from "@/components/ui/Button";
+import Card from "@/components/ui/Card";
+import Slider from "@/components/ui/Slider";
+import Title from "@/components/ui/Title";
 
 type Props = {
   sim: ReturnType<typeof useSimulation>;

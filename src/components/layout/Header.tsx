@@ -1,5 +1,5 @@
-import { useSimulation } from "../../hooks/useSimulation";
-import Title from "../ui/Title";
+import { useSimulation } from "@/hooks/useSimulation";
+import Title from "@/components/ui/Title";
 
 type Props = {
   sim: ReturnType<typeof useSimulation>;

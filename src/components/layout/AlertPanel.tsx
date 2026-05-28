@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
-import type { useSimulation } from "../../hooks/useSimulation";
-import Card from "../ui/Card";
-import Title from "../ui/Title";
-import AlertItem from "./AlertItem";
+import type { useSimulation } from "@/hooks/useSimulation";
+import Card from "@/components/ui/Card";
+import Title from "@/components/ui/Title";
+import AlertItem from "@/components/layout/AlertItem";
 
 type Props = {
   sim: ReturnType<typeof useSimulation>;

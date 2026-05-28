@@ -1,9 +1,9 @@
-import AlertPanel from "./components/layout/AlertPanel";
-import ChartPanel from "./components/layout/ChartPanel";
-import ControlPanel from "./components/layout/ControlPanel";
-import Header from "./components/layout/Header";
-import StatusPanel from "./components/layout/StatusPanel";
-import { useSimulation } from "./hooks/useSimulation";
+import AlertPanel from "@/components/layout/AlertPanel";
+import ChartPanel from "@/components/layout/ChartPanel";
+import ControlPanel from "@/components/layout/ControlPanel";
+import Header from "@/components/layout/Header";
+import StatusPanel from "@/components/layout/StatusPanel";
+import { useSimulation } from "@/hooks/useSimulation";
 
 function App() {
   const sim = useSimulation();
