@@ -1,4 +1,4 @@
-import { type SystemMode } from "../simulation/types";
+import { type SystemMode } from "@/types";
 
 type Props = {
   value: SystemMode;

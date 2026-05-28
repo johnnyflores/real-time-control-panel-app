@@ -1,4 +1,4 @@
-import { type SystemState } from "@/simulation/types";
+import { type SystemState } from "@/types";
 
 export const initialState: SystemState = {
   time: 0,

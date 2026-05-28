@@ -1,6 +1,6 @@
 import Card from "@/components/ui/Card";
 import Badge from "@/components/ui/Badge";
-import type { Alert } from "@/simulation/types";
+import type { Alert } from "@/types";
 
 type Props = {
   alert: Alert;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { initialState, updateSystem } from "@/simulation/engine";
-import { type SystemState } from "@/simulation/types";
+import { type SystemState } from "@/types";
 
 export function useSimulation() {
   const [state, setState] = useState<SystemState>(initialState);
