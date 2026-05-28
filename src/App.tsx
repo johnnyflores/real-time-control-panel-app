@@ -8,7 +8,7 @@ import { useSimulation } from "@/hooks/useSimulation";
 function App() {
   const sim = useSimulation();
   return (
-    <div className="min-h-screen bg-gray-950 text-white p-4 grid grid-rows-[auto_1fr_auto] gap-4">
+    <div className="min-h-screen dark:bg-gray-950 bg-gray-100 text-white p-4 grid grid-rows-[auto_1fr_auto] gap-4">
       <Header sim={sim} />
       <main className="grid grid-cols-12 gap-4">
         <ControlPanel sim={sim} />

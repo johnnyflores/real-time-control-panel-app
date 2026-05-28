@@ -7,7 +7,8 @@ export default function Card({ children, className = "" }: Props) {
   return (
     <div
       className={`
-        bg-gray-900
+        dark:bg-gray-900
+        bg-white
         p-4
         rounded
         shadow-sm

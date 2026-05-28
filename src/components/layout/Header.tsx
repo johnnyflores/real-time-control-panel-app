@@ -1,19 +1,22 @@
 import { useSimulation } from "@/hooks/useSimulation";
 import Title from "@/components/ui/Title";
+import { useTheme } from "@/hooks/useTheme";
+import ThemeToggle from "../ui/ThemeToggle";
 
 type Props = {
   sim: ReturnType<typeof useSimulation>;
 };
 
 const Header = ({ sim }: Props) => {
+  const { theme, toggleTheme } = useTheme();
   return (
-    <header className="bg-gray-900 p-4 rounded flex justify-between items-center">
+    <header className="dark:bg-gray-900 bg-white p-4 rounded flex justify-between items-center">
       <Title className="text-xl">Real-Time Dashboard</Title>
       <div className="flex gap-4 items-center">
-        <span>
+        <span className="dark:text-white text-gray-700">
           Mode: <span className="text-cyan-400">{sim.state.mode}</span>
         </span>
-        <span>
+        <span className="dark:text-white text-gray-700">
           Status:{" "}
           {sim.state.temperature > 90 ? (
             <span className="text-red-500">CRITICAL</span>
@@ -24,6 +27,7 @@ const Header = ({ sim }: Props) => {
           )}
         </span>
       </div>
+      <ThemeToggle theme={theme} onToggle={toggleTheme} />
     </header>
   );
 };
