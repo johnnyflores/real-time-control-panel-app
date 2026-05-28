@@ -7,7 +7,7 @@ import {
   ResponsiveContainer,
   CartesianGrid,
 } from "recharts";
-import type { SystemState } from "@/types";
+import type { SystemState } from "@/types/simulation";
 import Title from "@/components/ui/Title";
 import Card from "@/components/ui/Card";
 
