@@ -8,6 +8,7 @@ import {
   CartesianGrid,
 } from "recharts";
 import type { SystemState } from "../../simulation/types";
+import Title from "../ui/Title";
 
 type Props = {
   state: SystemState;
@@ -16,7 +17,7 @@ type Props = {
 const ChartPanel = ({ state }: Props) => {
   return (
     <div className="col-span-6 bg-gray-900 p-4 rounded">
-      <h2 className="font-semibold mb-4">Live Temperature Analysis</h2>
+      <Title>Live Temperature Analysis</Title>
       <div className="h-80">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={state.history}>

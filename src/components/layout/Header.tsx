@@ -1,4 +1,5 @@
 import { useSimulation } from "../../hooks/useSimulation";
+import Title from "../ui/Title";
 
 type Props = {
   sim: ReturnType<typeof useSimulation>;
@@ -7,7 +8,7 @@ type Props = {
 const Header = ({ sim }: Props) => {
   return (
     <header className="bg-gray-900 p-4 rounded flex justify-between items-center">
-      <h1 className="text-xl font-bold">RT Simulation Control System</h1>
+      <Title className="text-xl">Real-Time Dashboard</Title>
       <div className="flex gap-4 items-center">
         <span>
           Mode: <span className="text-cyan-400">{sim.state.mode}</span>

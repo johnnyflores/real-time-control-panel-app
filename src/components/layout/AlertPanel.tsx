@@ -1,4 +1,5 @@
 import type { useSimulation } from "../../hooks/useSimulation";
+import Title from "../ui/Title";
 
 type Props = {
   sim: ReturnType<typeof useSimulation>;
@@ -7,8 +8,7 @@ const AlertPanel = ({ sim }: Props) => {
   const { state } = sim;
   return (
     <div className="bg-gray-900 p-4 rounded mt-4">
-      <h2 className="font-semibold mb-3">Event Log</h2>
-
+      <Title>Event Log</Title>
       <div className="space-y-2 max-h-40 overflow-auto">
         {state.alerts.length === 0 ? (
           <p className="text-green-400">No events</p>

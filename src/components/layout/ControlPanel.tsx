@@ -1,4 +1,8 @@
 import { useSimulation } from "../../hooks/useSimulation";
+import ModeSelector from "../ModeSelector";
+import Button from "../ui/Button";
+import Slider from "../ui/Slider";
+import Title from "../ui/Title";
 
 type Props = {
   sim: ReturnType<typeof useSimulation>;
@@ -7,42 +11,23 @@ type Props = {
 const ControlPanel = ({ sim }: Props) => {
   return (
     <div className="col-span-3 bg-gray-900 p-4 rounded">
-      <h2 className="font-semibold mb-4">Control Panel</h2>
-      <button
-        onClick={() => sim.toggleRunning()}
-        className="w-full mb-4 bg-blue-600 p-2 rounded"
+      <Title>Control Panel</Title>
+      <Button
+        fullWidth
+        variant={sim.running ? "success" : "danger"}
+        onClick={sim.toggleRunning}
       >
-        {sim.running ? "Stop System" : "Start System"}
-      </button>
-      <label className="text-sm">Load: {sim.state.load}</label>
-      <input
-        type="range"
-        min="0"
-        max="100"
+        {sim.running ? "System Running" : "System Stopped"}
+      </Button>
+      <Slider
+        label={`Load: ${sim.state.load}`}
+        min={0}
+        max={100}
         value={sim.state.load}
         onChange={(e) => sim.setLoad(Number(e.target.value))}
-        className="w-full mb-6"
       />
       <div className="space-y-2">
-        {["normal", "stress", "emergency"].map((mode) => (
-          <button
-            key={mode}
-            onClick={() =>
-              sim.setMode(mode as "normal" | "stress" | "emergency")
-            }
-            className={`w-full p-2 rounded ${
-              sim.state.mode === mode
-                ? mode === "normal"
-                  ? "bg-green-600"
-                  : mode === "stress"
-                    ? "bg-yellow-600"
-                    : "bg-red-600"
-                : "bg-gray-700"
-            }`}
-          >
-            {mode.toUpperCase()}
-          </button>
-        ))}
+        <ModeSelector value={sim.state.mode} onChange={sim.setMode} />
       </div>
     </div>
   );

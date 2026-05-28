@@ -1,4 +1,5 @@
 import type { useSimulation } from "../../hooks/useSimulation";
+import Title from "../ui/Title";
 
 type Props = {
   sim: ReturnType<typeof useSimulation>;
@@ -7,7 +8,7 @@ const StatusPanel = ({ sim }: Props) => {
   const { state } = sim;
   return (
     <div className="col-span-3 bg-gray-900 p-4 rounded">
-      <h2 className="font-semibold mb-4">System Status</h2>
+      <Title>System Status</Title>
       <div
         className={`p-4 rounded text-center ${
           state.temperature > 90
