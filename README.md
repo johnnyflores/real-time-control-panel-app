@@ -42,6 +42,7 @@ The simulation updates once per second.
 - Initial mode: `normal`
 - History window: last `30` points
 - Alert log size: last `20` events
+- Alerts are emitted on status transitions into `warning` or `critical`
 
 ### Modes
 
@@ -85,7 +86,7 @@ It is responsible for:
 - advancing time
 - computing the next temperature from load and mode
 - appending chart history
-- generating alerts when thresholds are exceeded
+- generating alerts when the system crosses into warning or critical status
 
 ## Getting Started
 
