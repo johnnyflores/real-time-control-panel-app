@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { initialState, updateSystem } from "@/simulation/engine";
 import { type SystemState } from "@/types/simulation";
 import { SIMULATION_INTERVAL } from "@/constants/system";
@@ -17,15 +17,16 @@ export function useSimulation() {
     return () => clearInterval(interval);
   }, [running]);
 
-  const setLoad = (load: number) => {
-    setState((prev) => ({ ...prev, load }));
-  };
+  const setLoad = useCallback((load: number) => {
+    const nextLoad = Math.min(100, Math.max(0, load));
+    setState((prev) => ({ ...prev, load: nextLoad }));
+  }, []);
 
-  const setMode = (mode: SystemState["mode"]) => {
+  const setMode = useCallback((mode: SystemState["mode"]) => {
     setState((prev) => ({ ...prev, mode }));
-  };
+  }, []);
 
-  const toggleRunning = () => setRunning((r) => !r);
+  const toggleRunning = useCallback(() => setRunning((r) => !r), []);
 
   return {
     state,

@@ -1,6 +1,7 @@
 import { useSimulation } from "@/hooks/useSimulation";
 import Title from "@/components/ui/Title";
 import { useTheme } from "@/hooks/useTheme";
+import { getSystemStatus } from "@/utils/getSystemStatus";
 import ThemeToggle from "../ui/ThemeToggle";
 
 type Props = {
@@ -9,6 +10,14 @@ type Props = {
 
 const Header = ({ sim }: Props) => {
   const { theme, toggleTheme } = useTheme();
+  const status = getSystemStatus(sim.state.temperature);
+
+  const statusStyles = {
+    normal: "text-green-400",
+    warning: "text-yellow-400",
+    critical: "text-red-500",
+  } as const;
+
   return (
     <header className="dark:bg-gray-900 bg-white transition-colors duration-300 p-4 rounded flex justify-between items-center">
       <Title className="text-xl">Real-Time Dashboard</Title>
@@ -18,13 +27,7 @@ const Header = ({ sim }: Props) => {
         </span>
         <span className="dark:text-white text-gray-700 transition-colors duration-300">
           Status:{" "}
-          {sim.state.temperature > 90 ? (
-            <span className="text-red-500">CRITICAL</span>
-          ) : sim.state.temperature > 75 ? (
-            <span className="text-yellow-400">WARNING</span>
-          ) : (
-            <span className="text-green-400">NORMAL</span>
-          )}
+          <span className={statusStyles[status]}>{status.toUpperCase()}</span>
         </span>
       </div>
       <ThemeToggle theme={theme} onToggle={toggleTheme} />

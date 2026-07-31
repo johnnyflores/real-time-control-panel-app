@@ -1,5 +1,5 @@
-import { CRITICAL_TEMPERATURE, WARNING_TEMPERATURE } from "@/constants/system";
 import { type SystemState } from "@/types/simulation";
+import { getSystemStatus } from "@/utils/getSystemStatus";
 
 export const initialState: SystemState = {
   time: 0,
@@ -18,41 +18,47 @@ const HEAT_FACTORS = {
 
 const MAX_HISTORY_POINTS = 30;
 const MAX_ALERTS = 20;
-const cooling = 0.4;
+const COOLING_FACTOR = 0.4;
+
+function createStatusAlert(
+  status: "warning" | "critical",
+  time: number,
+  temperature: number,
+) {
+  return {
+    id: crypto.randomUUID(),
+    level: status,
+    message:
+      status === "critical"
+        ? "Critical temperature reached!"
+        : "High temperature detected",
+    time,
+    temperature,
+  };
+}
 
 export function updateSystem(state: SystemState): SystemState {
   const heatFactor = HEAT_FACTORS[state.mode];
+  const nextTime = state.time + 1;
 
-  const newTemp = state.temperature + state.load * heatFactor - cooling;
+  const newTemp = state.temperature + state.load * heatFactor - COOLING_FACTOR;
 
   const newAlerts = [...state.alerts];
+  const previousStatus = getSystemStatus(state.temperature);
+  const nextStatus = getSystemStatus(newTemp);
 
-  if (newTemp > CRITICAL_TEMPERATURE) {
-    newAlerts.push({
-      id: crypto.randomUUID(),
-      level: "critical",
-      message: "Critical temperature reached!",
-      time: state.time,
-      temperature: newTemp,
-    });
-  } else if (newTemp > WARNING_TEMPERATURE) {
-    newAlerts.push({
-      id: crypto.randomUUID(),
-      level: "warning",
-      message: "High temperature detected",
-      time: state.time,
-      temperature: newTemp,
-    });
+  if (nextStatus !== previousStatus && nextStatus !== "normal") {
+    newAlerts.push(createStatusAlert(nextStatus, nextTime, newTemp));
   }
 
   return {
     ...state,
-    time: state.time + 1,
+    time: nextTime,
     temperature: newTemp,
     history: [
-      ...state.history.slice(-MAX_HISTORY_POINTS),
+      ...state.history.slice(-(MAX_HISTORY_POINTS - 1)),
       {
-        time: state.time,
+        time: nextTime,
         temperature: newTemp,
       },
     ],
