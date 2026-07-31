@@ -10,22 +10,18 @@ export const initialState: SystemState = {
   alerts: [],
 };
 
+const HEAT_FACTORS = {
+  normal: 0.25,
+  stress: 0.6,
+  emergency: 1.2,
+} as const;
+
+const MAX_HISTORY_POINTS = 30;
+const MAX_ALERTS = 20;
+const cooling = 0.4;
+
 export function updateSystem(state: SystemState): SystemState {
-  let heatFactor = 0.25;
-
-  switch (state.mode) {
-    case "normal":
-      heatFactor = 0.25;
-      break;
-    case "stress":
-      heatFactor = 0.6;
-      break;
-    case "emergency":
-      heatFactor = 1.2;
-      break;
-  }
-
-  const cooling = 0.4;
+  const heatFactor = HEAT_FACTORS[state.mode];
 
   const newTemp = state.temperature + state.load * heatFactor - cooling;
 
@@ -33,6 +29,7 @@ export function updateSystem(state: SystemState): SystemState {
 
   if (newTemp > CRITICAL_TEMPERATURE) {
     newAlerts.push({
+      id: crypto.randomUUID(),
       level: "critical",
       message: "Critical temperature reached!",
       time: state.time,
@@ -40,6 +37,7 @@ export function updateSystem(state: SystemState): SystemState {
     });
   } else if (newTemp > WARNING_TEMPERATURE) {
     newAlerts.push({
+      id: crypto.randomUUID(),
       level: "warning",
       message: "High temperature detected",
       time: state.time,
@@ -52,12 +50,12 @@ export function updateSystem(state: SystemState): SystemState {
     time: state.time + 1,
     temperature: newTemp,
     history: [
-      ...state.history.slice(-30),
+      ...state.history.slice(-MAX_HISTORY_POINTS),
       {
         time: state.time,
         temperature: newTemp,
       },
     ],
-    alerts: newAlerts.slice(-20),
+    alerts: newAlerts.slice(-MAX_ALERTS),
   };
 }

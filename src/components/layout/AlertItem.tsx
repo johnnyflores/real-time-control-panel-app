@@ -10,15 +10,16 @@ type Props = {
 };
 
 export default function AlertItem({ alert }: Props) {
+  const status = getSystemStatus(alert.temperature);
   return (
     <Card className="p-2 animate-fade-in">
       <div className="flex justify-between items-center">
         <p className="font-semibold flex items-center gap-2 dark:text-white text-gray-700">
           {alert.message}
         </p>
-        <Badge status={getSystemStatus(alert.temperature)}>
-          <span className="text-xs uppercase">
-            {getSystemStatus(alert.temperature)}
+        <Badge status={status}>
+          <span className="text-xs uppercase" aria-label={`Status ${status}`}>
+            {status}
           </span>
         </Badge>
       </div>

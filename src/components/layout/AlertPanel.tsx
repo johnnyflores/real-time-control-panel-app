@@ -21,8 +21,8 @@ const AlertPanel = ({ sim }: Props) => {
         {state.alerts.length === 0 ? (
           <p className="text-green-400">No events</p>
         ) : (
-          state.alerts.map((alert, index) => (
-            <AlertItem key={index} alert={alert} />
+          state.alerts.map((alert) => (
+            <AlertItem key={alert.id} alert={alert} />
           ))
         )}
         <div ref={bottomRef} />
