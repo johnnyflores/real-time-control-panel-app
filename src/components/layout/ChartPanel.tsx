@@ -6,10 +6,10 @@ import {
   Tooltip,
   ResponsiveContainer,
   CartesianGrid,
-} from "recharts";
-import type { SystemState } from "@/types/simulation";
-import Title from "@/components/ui/Title";
-import Card from "@/components/ui/Card";
+} from 'recharts';
+import type { SystemState } from '@/types/simulation';
+import Title from '@/components/ui/Title';
+import Card from '@/components/ui/Card';
 
 type Props = {
   state: SystemState;

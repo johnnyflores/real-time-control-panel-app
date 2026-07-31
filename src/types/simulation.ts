@@ -1,6 +1,6 @@
-import type { Alert } from "@/types/alert";
+import type { Alert } from '@/types/alert';
 
-export type SimulationMode = "normal" | "stress" | "emergency";
+export type SimulationMode = 'normal' | 'stress' | 'emergency';
 
 export type HistoryPoint = {
   time: number;

@@ -1,8 +1,8 @@
-import { useEffect, useRef } from "react";
-import type { useSimulation } from "@/hooks/useSimulation";
-import Card from "@/components/ui/Card";
-import Title from "@/components/ui/Title";
-import AlertItem from "@/components/layout/AlertItem";
+import { useEffect, useRef } from 'react';
+import type { useSimulation } from '@/hooks/useSimulation';
+import Card from '@/components/ui/Card';
+import Title from '@/components/ui/Title';
+import AlertItem from '@/components/layout/AlertItem';
 
 type Props = {
   sim: ReturnType<typeof useSimulation>;
@@ -12,7 +12,7 @@ const AlertPanel = ({ sim }: Props) => {
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [state.alerts]);
   return (
     <Card>

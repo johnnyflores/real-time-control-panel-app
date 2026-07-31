@@ -1,8 +1,8 @@
-import { useSimulation } from "@/hooks/useSimulation";
-import Title from "@/components/ui/Title";
-import { useTheme } from "@/hooks/useTheme";
-import { getSystemStatus } from "@/utils/getSystemStatus";
-import ThemeToggle from "../ui/ThemeToggle";
+import { useSimulation } from '@/hooks/useSimulation';
+import Title from '@/components/ui/Title';
+import { useTheme } from '@/hooks/useTheme';
+import { getSystemStatus } from '@/utils/getSystemStatus';
+import ThemeToggle from '../ui/ThemeToggle';
 
 type Props = {
   sim: ReturnType<typeof useSimulation>;
@@ -13,9 +13,9 @@ const Header = ({ sim }: Props) => {
   const status = getSystemStatus(sim.state.temperature);
 
   const statusStyles = {
-    normal: "text-green-400",
-    warning: "text-yellow-400",
-    critical: "text-red-500",
+    normal: 'text-green-400',
+    warning: 'text-yellow-400',
+    critical: 'text-red-500',
   } as const;
 
   return (
@@ -26,7 +26,7 @@ const Header = ({ sim }: Props) => {
           Mode: <span className="text-cyan-400">{sim.state.mode}</span>
         </span>
         <span className="dark:text-white text-gray-700 transition-colors duration-300">
-          Status:{" "}
+          Status:{' '}
           <span className={statusStyles[status]}>{status.toUpperCase()}</span>
         </span>
       </div>

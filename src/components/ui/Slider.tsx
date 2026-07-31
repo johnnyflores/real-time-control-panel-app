@@ -1,10 +1,10 @@
-import { type InputHTMLAttributes } from "react";
+import { type InputHTMLAttributes } from 'react';
 
 type Props = InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
 };
 
-export default function Slider({ label, className = "", ...props }: Props) {
+export default function Slider({ label, className = '', ...props }: Props) {
   return (
     <div className="w-full mb-6 mt-6">
       {label && (

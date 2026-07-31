@@ -1,5 +1,5 @@
-import { type SimulationMode } from "@/types/simulation";
-import { MODES } from "@/constants/modes";
+import { type SimulationMode } from '@/types/simulation';
+import { MODES } from '@/constants/modes';
 
 type Props = {
   value: SimulationMode;
@@ -18,7 +18,7 @@ export default function ModeSelector({ value, onChange }: Props) {
             className={`
               w-full p-2 rounded transition-colors duration-200
               hover:opacity-90
-              ${isActive ? mode.color : "bg-gray-700"}
+              ${isActive ? mode.color : 'bg-gray-700'}
             `}
           >
             {mode.label}

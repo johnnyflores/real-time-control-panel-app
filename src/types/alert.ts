@@ -1,4 +1,4 @@
-export type AlertLevel = "normal" | "warning" | "critical";
+export type AlertLevel = 'normal' | 'warning' | 'critical';
 
 export type Alert = {
   id: string;

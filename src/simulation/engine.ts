@@ -1,11 +1,11 @@
-import { type SystemState } from "@/types/simulation";
-import { getSystemStatus } from "@/utils/getSystemStatus";
+import { type SystemState } from '@/types/simulation';
+import { getSystemStatus } from '@/utils/getSystemStatus';
 
 export const initialState: SystemState = {
   time: 0,
   temperature: 50,
   load: 20,
-  mode: "normal",
+  mode: 'normal',
   history: [],
   alerts: [],
 };
@@ -21,17 +21,17 @@ const MAX_ALERTS = 20;
 const COOLING_FACTOR = 0.4;
 
 function createStatusAlert(
-  status: "warning" | "critical",
+  status: 'warning' | 'critical',
   time: number,
-  temperature: number,
+  temperature: number
 ) {
   return {
     id: crypto.randomUUID(),
     level: status,
     message:
-      status === "critical"
-        ? "Critical temperature reached!"
-        : "High temperature detected",
+      status === 'critical'
+        ? 'Critical temperature reached!'
+        : 'High temperature detected',
     time,
     temperature,
   };
@@ -47,7 +47,7 @@ export function updateSystem(state: SystemState): SystemState {
   const previousStatus = getSystemStatus(state.temperature);
   const nextStatus = getSystemStatus(newTemp);
 
-  if (nextStatus !== previousStatus && nextStatus !== "normal") {
+  if (nextStatus !== previousStatus && nextStatus !== 'normal') {
     newAlerts.push(createStatusAlert(nextStatus, nextTime, newTemp));
   }
 

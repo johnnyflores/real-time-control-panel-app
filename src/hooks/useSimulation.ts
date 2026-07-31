@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useState } from "react";
-import { initialState, updateSystem } from "@/simulation/engine";
-import { type SystemState } from "@/types/simulation";
-import { SIMULATION_INTERVAL } from "@/constants/system";
+import { useCallback, useEffect, useState } from 'react';
+import { initialState, updateSystem } from '@/simulation/engine';
+import { type SystemState } from '@/types/simulation';
+import { SIMULATION_INTERVAL } from '@/constants/system';
 
 export function useSimulation() {
   const [state, setState] = useState<SystemState>(initialState);
@@ -22,7 +22,7 @@ export function useSimulation() {
     setState((prev) => ({ ...prev, load: nextLoad }));
   }, []);
 
-  const setMode = useCallback((mode: SystemState["mode"]) => {
+  const setMode = useCallback((mode: SystemState['mode']) => {
     setState((prev) => ({ ...prev, mode }));
   }, []);
 

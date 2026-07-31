@@ -1,13 +1,13 @@
 type Props = {
-  status: "normal" | "warning" | "critical";
+  status: 'normal' | 'warning' | 'critical';
   children: React.ReactNode;
 };
 
 export default function Badge({ status, children }: Props) {
   const colors = {
-    normal: "bg-green-600",
-    warning: "bg-yellow-600",
-    critical: "bg-red-600",
+    normal: 'bg-green-600',
+    warning: 'bg-yellow-600',
+    critical: 'bg-red-600',
   };
 
   return (

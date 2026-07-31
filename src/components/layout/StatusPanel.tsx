@@ -1,7 +1,7 @@
-import type { useSimulation } from "@/hooks/useSimulation";
-import Card from "@/components/ui/Card";
-import Title from "@/components/ui/Title";
-import { getSystemStatus } from "@/utils/getSystemStatus";
+import type { useSimulation } from '@/hooks/useSimulation';
+import Card from '@/components/ui/Card';
+import Title from '@/components/ui/Title';
+import { getSystemStatus } from '@/utils/getSystemStatus';
 
 type Props = {
   sim: ReturnType<typeof useSimulation>;
@@ -11,9 +11,9 @@ const StatusPanel = ({ sim }: Props) => {
   const status = getSystemStatus(state.temperature);
 
   const statusBackground = {
-    normal: "bg-green-600",
-    warning: "bg-yellow-600",
-    critical: "bg-red-600",
+    normal: 'bg-green-600',
+    warning: 'bg-yellow-600',
+    critical: 'bg-red-600',
   } as const;
 
   return (

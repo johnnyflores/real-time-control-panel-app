@@ -1,9 +1,9 @@
-import { useSimulation } from "@/hooks/useSimulation";
-import ModeSelector from "@/components/ModeSelector";
-import Button from "@/components/ui/Button";
-import Card from "@/components/ui/Card";
-import Slider from "@/components/ui/Slider";
-import Title from "@/components/ui/Title";
+import { useSimulation } from '@/hooks/useSimulation';
+import ModeSelector from '@/components/ModeSelector';
+import Button from '@/components/ui/Button';
+import Card from '@/components/ui/Card';
+import Slider from '@/components/ui/Slider';
+import Title from '@/components/ui/Title';
 
 type Props = {
   sim: ReturnType<typeof useSimulation>;
@@ -15,10 +15,10 @@ const ControlPanel = ({ sim }: Props) => {
       <Title>Control Panel</Title>
       <Button
         fullWidth
-        variant={sim.running ? "success" : "danger"}
+        variant={sim.running ? 'success' : 'danger'}
         onClick={sim.toggleRunning}
       >
-        {sim.running ? "System Running" : "System Stopped"}
+        {sim.running ? 'System Running' : 'System Stopped'}
       </Button>
       <Slider
         label={`Load: ${sim.state.load}`}

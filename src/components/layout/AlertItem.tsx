@@ -1,9 +1,9 @@
-import Card from "@/components/ui/Card";
-import Badge from "@/components/ui/Badge";
-import type { Alert } from "@/types/alert";
-import { getSystemStatus } from "@/utils/getSystemStatus";
-import { formatTemperature } from "@/utils/formatTemperature";
-import { formatTime } from "@/utils/formatTime";
+import Card from '@/components/ui/Card';
+import Badge from '@/components/ui/Badge';
+import type { Alert } from '@/types/alert';
+import { getSystemStatus } from '@/utils/getSystemStatus';
+import { formatTemperature } from '@/utils/formatTemperature';
+import { formatTime } from '@/utils/formatTime';
 
 type Props = {
   alert: Alert;
@@ -24,7 +24,7 @@ export default function AlertItem({ alert }: Props) {
         </Badge>
       </div>
       <p className="text-xs opacity-80 mt-1 dark:text-gray-300 text-gray-700">
-        Time: {formatTime(alert.time)} • Temp:{" "}
+        Time: {formatTime(alert.time)} • Temp:{' '}
         {formatTemperature(alert.temperature)}
       </p>
     </Card>
