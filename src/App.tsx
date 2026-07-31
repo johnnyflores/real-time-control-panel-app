@@ -4,6 +4,7 @@ import ControlPanel from '@/components/layout/ControlPanel';
 import Header from '@/components/layout/Header';
 import StatusPanel from '@/components/layout/StatusPanel';
 import { useSimulation } from '@/hooks/useSimulation';
+import Footer from '@/components/layout/Footer';
 
 function App() {
   const sim = useSimulation();
@@ -16,6 +17,7 @@ function App() {
         <StatusPanel sim={sim} />
       </main>
       <AlertPanel sim={sim} />
+      <Footer />
     </div>
   );
 }
